@@ -1,5 +1,7 @@
 defmodule Dialyxir.OutputTest do
   use ExUnit.Case
+  require Dialyxir.Output
+  require Erlex
   alias Dialyxir.Output
 
   setup do

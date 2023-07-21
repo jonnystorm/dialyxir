@@ -1,5 +1,7 @@
 defmodule Mix.Tasks.DialyzerTest do
   use ExUnit.Case
+  require :dialyzer_plt
+  require Mix.Tasks.Dialyzer
 
   import ExUnit.CaptureIO, only: [capture_io: 1]
 

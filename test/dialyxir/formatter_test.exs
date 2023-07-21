@@ -1,5 +1,10 @@
 defmodule Dialyxir.FormatterTest do
   use ExUnit.Case
+  require Dialyxir.FilterMap
+  require Dialyxir.Formatter
+  require Dialyxir.Formatter.{Dialyxir, Dialyzer, Short}
+  require Dialyxir.Warnings
+  require Dialyxir.Warnings.{NoReturn, UnknownType}
 
   import ExUnit.CaptureIO, only: [capture_io: 1]
 
@@ -86,7 +91,7 @@ defmodule Dialyxir.FormatterTest do
 
       in_project(:ignore, fn ->
         assert {:warn, [], {:unused_filters_present, warning}} =
-                 Formatter.format_and_filter([warning], Project, filter_args, :dialyxir)
+                 Formatter.format_and_filter([warning], Project, filter_args, DialyxirFormatter)
 
         assert warning =~ "Unused filters:"
       end)
@@ -101,7 +106,7 @@ defmodule Dialyxir.FormatterTest do
 
       in_project(:ignore, fn ->
         {:error, [], {:unused_filters_present, error}} =
-          Formatter.format_and_filter([warning], Project, filter_args, :dialyxir)
+          Formatter.format_and_filter([warning], Project, filter_args, DialyxirFormatter)
 
         assert error =~ "Unused filters:"
       end)
@@ -116,7 +121,7 @@ defmodule Dialyxir.FormatterTest do
 
       in_project(:ignore, fn ->
         assert {:warn, [], {:unused_filters_present, warning}} =
-                 Formatter.format_and_filter([warning], Project, filter_args, :dialyxir)
+                 Formatter.format_and_filter([warning], Project, filter_args, DialyxirFormatter)
 
         refute warning =~ "Unused filters:"
       end)

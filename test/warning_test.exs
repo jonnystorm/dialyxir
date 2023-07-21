@@ -1,5 +1,8 @@
 defmodule Dialyxir.Test.WarningTest do
   use ExUnit.Case
+  require :lexer
+  require :parser
+  require Dialyxir.Warnings.PatternMatch
 
   # Don't test output in here, just that it can succeed.
 
